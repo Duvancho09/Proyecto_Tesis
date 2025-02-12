@@ -1,0 +1,33 @@
+/*.container{
+    height: 100%;
+    margin: 0;
+}*/
+/*.container-mid-color{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.left, .right{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}*/
+
+/*.left {
+    background: #322D59;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+  }
+  
+  .right {
+    background: #050849;
+    clip-path: polygon(0 0, 100% 100%, 100% 0);
+  }*/
+  
+  .background-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+  }
+    
