@@ -1,0 +1,113 @@
+.login-container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  color: white;
+  margin: auto;
+  display: grid;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+h2 {
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+  
+p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+  
+label {
+  display: block;
+  text-align: left;
+  margin: 10px 0 5px;
+  font-size: 0.9rem;
+}
+  
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  outline: none;
+}
+  
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+  
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #673ab7;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+}
+  
+button:hover {
+  background-color: #512da8;
+}
+  
+.extra-options {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+  
+.extra-options a {
+  color: #ffccff;
+  text-decoration: none;
+}
+  
+.extra-options a:hover {
+  text-decoration: underline;
+}
+  
+.social-login {
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.social-login a:hover {
+  text-decoration: underline;
+}
+  
+.google-login,
+.facebook-login {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 5px;
+}
+  
+.google-login {
+  background-color: #db4437;
+  color: white;
+}
+  
+.google-login:hover {
+  background-color: #c1351d;
+}
+  
+.facebook-login {
+  background-color: #1877f2;
+  color: white;
+}
+  
+.facebook-login:hover {
+  background-color: #0d6fd1;
+}

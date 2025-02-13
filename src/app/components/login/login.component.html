@@ -1,1 +1,18 @@
-<h1>hola</h1>
+<div class="login-container">
+    <h2>Iniciar Sesión</h2>
+    <form [formGroup]="datosFormulario" (ngSubmit)="ingresar()">
+        <label for="username">USUARIO</label>
+        <input type="text" id="username" placeholder="Ingrese su usuario" required autocomplete="off">
+        <label for="password">CONTRASEÑA</label>
+        <input type="password" id="password" placeholder="Ingrese su contraseña" required autocomplete="off">
+        <button type="submit">INGRESAR</button>
+        <div class="extra-options">
+            <a href="/recoverpassword" aria-label="link que envia al usuario a la pagina de recuperar la contraseña">Olvidé mi contraseña</a> | 
+            <a href="/register" aria-label="link que envia al usuario a la pagina de registro">Registrarse</a>
+        </div>
+        <div class="social-login">
+            <button type="submit" class="google-login">Iniciar con Google</button>
+            <button type="submit" class="facebook-login">Iniciar con Facebook</button>
+        </div>
+    </form>
+  </div>
