@@ -1,10 +1,10 @@
 <div class="login-container">
     <h2>Iniciar Sesión</h2>
-    <form [formGroup]="datosFormulario" (ngSubmit)="ingresar()">
+    <form [formGroup]="dataForm" (ngSubmit)="ingresar()">
         <label for="username">USUARIO</label>
-        <input type="text" id="username" placeholder="Ingrese su usuario" required autocomplete="off">
+        <input type="text" id="username" formControlName="username" placeholder="Ingrese su usuario" required autocomplete="off">
         <label for="password">CONTRASEÑA</label>
-        <input type="password" id="password" placeholder="Ingrese su contraseña" required autocomplete="off">
+        <input type="password" id="password" formControlName="password" placeholder="Ingrese su contraseña" required autocomplete="off">
         <button type="submit">INGRESAR</button>
         <div class="extra-options">
             <a href="/recoverpassword" aria-label="link que envia al usuario a la pagina de recuperar la contraseña">Olvidé mi contraseña</a> | 

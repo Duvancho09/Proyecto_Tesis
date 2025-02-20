@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -11,15 +12,30 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  datosFormulario = new FormGroup({
-    usuario: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-    contraseña: new FormControl('', [Validators.required, Validators.maxLength(30)])
+  dataForm = new FormGroup({
+    username: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    password: new FormControl('', [Validators.required, Validators.maxLength(30)])
   });
 
   constructor(private router: Router){}
 
   ingresar(){
-    this.router.navigate(['/home']);
+    if(this.dataForm.valid){
+      let data = this.dataForm.value
+      console.log(data);
+      Swal.fire(
+        'Datos correctos',
+        'Disfruta de la página y las cosas que trae para ti!!!',
+        'success'
+      )
+      this.router.navigate(['/home']);
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Por favor revisa todos los campos',
+        text: '¡Los campos estan vacios o no son validos!',
+      })
+    }
   }
 
 }
