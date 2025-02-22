@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -13,7 +13,13 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent {
   dataRegister = new FormGroup({
-
+    name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    lastname: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    email: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    confirmEmail: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    username: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    password: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    confirmPassword: new FormControl('', [Validators.required, Validators.maxLength(30)]),
   })
 
   constructor(private router: Router){}
@@ -27,7 +33,7 @@ export class RegisterComponent {
           'Inicia sesión y disfruta de la página y las cosas que trae para ti!!!',
           'success'
         )
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }else{
         Swal.fire({
           icon: 'error',
