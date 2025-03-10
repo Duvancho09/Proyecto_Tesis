@@ -15,9 +15,10 @@ export class RegisterComponent {
   dataRegister = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
     lastname: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    username: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    telephone: new FormControl('', [Validators.required, Validators.maxLength(20)]),
     email: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     confirmEmail: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-    username: new FormControl('', [Validators.required, Validators.maxLength(30)]),
     password: new FormControl('', [Validators.required, Validators.maxLength(30)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.maxLength(30)]),
   })

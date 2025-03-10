@@ -9,19 +9,12 @@
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
   color: white;
   margin: auto;
-  /* display: flex;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem; */
-  justify-content: center;
-  justify-content: space-between;
 }
 
 form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-  gap: 1rem; /* Espacio entre elementos */
-  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
   
 h2 {
@@ -35,10 +28,7 @@ p {
 }
   
 label {
-  /* display: block; */
   text-align: right;
-  /* margin: 10px 0 5px; */
-  /* font-size: 0.9rem; */
   grid-column: span 1;
 }
   
@@ -51,6 +41,7 @@ input {
   background: rgba(255, 255, 255, 0.2);
   color: white;
   outline: none;
+  text-align: center;
 }
   
 input::placeholder {
@@ -67,8 +58,8 @@ button {
   font-size: 1rem;
   cursor: pointer;
   margin-top: 10px;
-  /* grid-column: span 2;
-  text-align: center; */
+  grid-column: span 2;
+  text-align: center;
 }
   
 button:hover {

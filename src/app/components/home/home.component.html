@@ -1,1 +1,33 @@
-<p>home works!</p>
+<div class="collections-container">
+    <h2>Colecciones</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  
+    <!-- Filtros -->
+    <div class="filters">
+      <button (click)="filterCategory('Arte')">Arte</button>
+      <button (click)="filterCategory('Deportes')">Deportes</button>
+      <button (click)="filterCategory('Fotografia')">Fotografia</button>
+      <button (click)="filterCategory('Animales')">Animales</button>
+      <button class="filter-btn">Filtrar</button>
+    </div>
+  
+    <!-- Grid de imágenes -->
+    <div class="grid">
+      <div class="card" *ngFor="let item of collections">
+        <img [src]="item.img" alt="{{ item.title }}">
+        <div class="card-info">
+          <p>&#64;gallery</p>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.price }}</p>
+          <button class="detail-btn">Ver detalles</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Paginación -->
+    <div class="pagination">
+      <span>1/10</span>
+      <button class="next-btn">Siguiente</button>
+    </div>
+  </div>
+  
