@@ -1,8 +1,11 @@
-<div class="collections-container">
+<!-- <div class="collections-container">
+  <header class="header">
+    <h1>SnowTech</h1>
+    <input type="text" placeholder="Buscar por nombre..." [(ngModel)]="searchText" (input)="filterImages()">
+  </header>
     <h2>Colecciones</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   
-    <!-- Filtros -->
     <div class="filters">
       <button (click)="filterCategory('Arte')">Arte</button>
       <button (click)="filterCategory('Deportes')">Deportes</button>
@@ -11,7 +14,6 @@
       <button class="filter-btn">Filtrar</button>
     </div>
   
-    <!-- Grid de imágenes -->
     <div class="grid">
       <div class="card" *ngFor="let item of collections">
         <img [src]="item.img" alt="{{ item.title }}">
@@ -24,10 +26,71 @@
       </div>
     </div>
   
-    <!-- Paginación -->
     <div class="pagination">
       <span>1/10</span>
       <button class="next-btn">Siguiente</button>
     </div>
-  </div>
+
+    <footer class="footer">
+      <p>Conectado con SnowTech | Redes Sociales</p>
+    </footer>
+  </div> -->
+<navbar/>
+  <div class="container">
+    <!-- Header con el logo y la barra de búsqueda -->
+    <header class="header">
+      <h1 class="logo">Snow<span class="highlight">Tech</span></h1>
+      <input type="text" placeholder="🔍 Buscar por nombre..." [(ngModel)]="searchText" (input)="filterImages()">
+    </header>
   
+    <!-- Sección de categorías -->
+    <section class="categories">
+      <button (click)="filterByCategory('all')">Todos</button>
+      <button (click)="filterByCategory('art')">Arte</button>
+      <button (click)="filterByCategory('music')">Música</button>
+      <button (click)="filterByCategory('photography')">Fotografía</button>
+      <button (click)="filterByCategory('sculpture')">Escultura</button>
+    </section>
+
+
+  
+    <!-- Galería de imágenes -->
+    <section class="gallery">
+      <div class="image-card" *ngFor="let image of filteredImages">
+        <img class="imagen" [src]="image.url" [alt]="image.name">
+        <p class="image-title">&#64;{{ image.author }}</p>
+        <p class="image-category">{{ image.name }}</p>
+        <p class="image-price">0.005 ETH</p>
+        <button class="detail-btn">Ver detalles</button>
+      </div>
+    </section>
+  
+    <!-- Paginación -->
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">← Anterior</button>
+      <span>{{ currentPage }}/{{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente →</button>
+    </div>
+  
+    <!-- Sección de redes sociales y footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>SnowTech</h3>
+          <p>Explora, descubre y colecciona arte digital único.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Compañía</h3>
+          <p>Acerca de | Política | Términos</p>
+        </div>
+        <div class="footer-section">
+          <h3>Redes</h3>
+          <p>Facebook | Twitter | Instagram</p>
+        </div>
+      </div>
+      <p class="footer-bottom">Creado por <b>SnowTech</b> | Todos los derechos reservados.</p>
+    </footer>
+    <footer class="footer">
+      <p>Conectado con SnowTech | Redes Sociales</p>
+    </footer>
+  </div>  
