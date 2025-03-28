@@ -1,11 +1,17 @@
 <header class="header" @translateY>
-  <div class="logo animacion-entrada">Snow<span class="highlight">Tech</span></div>
+  <div class="logo animacion-entrada">
+    <a href="/home">
+      <button>
+        Snow<span class="highlight">Tech</span>
+      </button>
+    </a>
+    </div>
     <!-- Barra de búsqueda -->
     <div class="search-container animacion-entrada">
       <span class="search-icon">🔍</span>
       <input type="text" placeholder="Encuentra colecciones y artículos" [(ngModel)]="searchText" (input)="onSearch()">
     </div>
-    <!-- Menú desplegable de Categorías -->
+
     <div class="dropdown animacion-entrada">
       <button class="dropbtn" (click)="toggleDropdown()">CATEGORIAS ⏷</button>
       <div class="dropdown-content animacion-entrada" [class.show]="dropdownOpen">
@@ -15,9 +21,9 @@
         <a (click)="filterByCategory('sculpture')">Escultura</a>
       </div>
     </div>
-    <!-- Botón de conectar Wallet -->
+
     <button class="wallet-btn animacion-entrada">Conectar Wallet</button>
-    <!-- Ícono de perfil -->
+
     <div class="profile-icon animacion-entrada">
       <a href="/editProfile" aria-label="enlace para entrar a editar el perfil">
         <img src="assets/imgs/perfil.png" alt="Perfil">

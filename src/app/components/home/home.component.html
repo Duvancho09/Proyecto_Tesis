@@ -1,96 +1,77 @@
-<!-- <div class="collections-container">
-  <header class="header">
-    <h1>SnowTech</h1>
-    <input type="text" placeholder="Buscar por nombre..." [(ngModel)]="searchText" (input)="filterImages()">
-  </header>
-    <h2>Colecciones</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-  
-    <div class="filters">
-      <button (click)="filterCategory('Arte')">Arte</button>
-      <button (click)="filterCategory('Deportes')">Deportes</button>
-      <button (click)="filterCategory('Fotografia')">Fotografia</button>
-      <button (click)="filterCategory('Animales')">Animales</button>
-      <button class="filter-btn">Filtrar</button>
-    </div>
-  
-    <div class="grid">
-      <div class="card" *ngFor="let item of collections">
-        <img [src]="item.img" alt="{{ item.title }}">
-        <div class="card-info">
-          <p>&#64;gallery</p>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.price }}</p>
-          <button class="detail-btn">Ver detalles</button>
-        </div>
-      </div>
-    </div>
-  
-    <div class="pagination">
-      <span>1/10</span>
-      <button class="next-btn">Siguiente</button>
-    </div>
-
-    <footer class="footer">
-      <p>Conectado con SnowTech | Redes Sociales</p>
-    </footer>
-  </div> -->
 <navbar/>
-  <div class="container">
-    <!-- Header con el logo y la barra de búsqueda -->
-    <header class="header">
-      <h1 class="logo">Snow<span class="highlight">Tech</span></h1>
-      <input type="text" placeholder="🔍 Buscar por nombre..." [(ngModel)]="searchText" (input)="filterImages()">
-    </header>
-  
-    <!-- Sección de categorías -->
-    <section class="categories">
-      <button (click)="filterByCategory('all')">Todos</button>
-      <button (click)="filterByCategory('art')">Arte</button>
-      <button (click)="filterByCategory('music')">Música</button>
-      <button (click)="filterByCategory('photography')">Fotografía</button>
-      <button (click)="filterByCategory('sculpture')">Escultura</button>
-    </section>
-
-
-  
-    <!-- Galería de imágenes -->
-    <section class="gallery">
-      <div class="image-card" *ngFor="let image of filteredImages">
-        <img class="imagen" [src]="image.url" [alt]="image.name">
-        <p class="image-title">&#64;{{ image.author }}</p>
-        <p class="image-category">{{ image.name }}</p>
-        <p class="image-price">0.005 ETH</p>
-        <button class="detail-btn">Ver detalles</button>
-      </div>
-    </section>
-  
-    <!-- Paginación -->
-    <div class="pagination">
-      <button (click)="prevPage()" [disabled]="currentPage === 1">← Anterior</button>
-      <span>{{ currentPage }}/{{ totalPages }}</span>
-      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente →</button>
+<div class="container">
+    <section class="hero">
+    <div class="hero-content">
+        <div class="text-area">
+            <h1>Crea, vende y recolecta tus nft favoritos en esta comunidad en español.</h1>
+            <div class="buttons">
+                <button class="btn-white">Vende NFT</button>
+                <button class="btn-red">Explorar más</button>
+            </div>
+        </div>
+        
+        <div class="hero-right">
+        <div class="image-grid">
+            <img src="assets/imgs/azul.png" alt="">
+            <img src="assets/imgs/modelo.jpg" alt="">
+            <img src="assets/imgs/verde.png" alt="">
+            <img src="assets/imgs/cerebro.jpg" alt="">
+            <img src="assets/imgs/mujer.png" alt="">
+            <img src="assets/imgs/conejo.jpg" alt="">
+        </div>
+        </div>
     </div>
-  
-    <!-- Sección de redes sociales y footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>SnowTech</h3>
-          <p>Explora, descubre y colecciona arte digital único.</p>
+
+    <div class="logos">
+        <img src="assets/binance.png" alt="Binance">
+        <img src="assets/ethereum.png" alt="Ethereum">
+        <img src="assets/exodus.png" alt="Exodus">
+    </div>
+</section>
+
+    <section class="hero-section">
+        <div class="hero-left">
+            <h1>Crea, vende y recolecta tus nft favoritos en esta comunidad en español.</h1>
+            <div class="hero-buttons">
+                <button class="btn-white">Vende NFT</button>
+                <button class="btn-red">Explorar mas</button>
+            </div>
         </div>
-        <div class="footer-section">
-          <h3>Compañía</h3>
-          <p>Acerca de | Política | Términos</p>
+        
+            <div class="image-grid">
+                <img src="assets/imgs/azul.png" alt="Imagen 1 del collage">
+                <img src="assets/imgs/modelo.jpg" alt="Imagen 2 del collage">
+                <img src="assets/imgs/verde.png" alt="Imagen 3 del collage">
+                <img src="assets/imgs/cerebro.jpg" alt="Imagen 4 del collage">
+                <img src="assets/imgs/mujer.png" alt="Imagen 5 del collage">
+                <img src="assets/imgs/conejo.jpg" alt="Imagen 6 del collage">
+            </div>
+        <div class="hero-logos">
+            <img src="assets/imgs/binance.png" alt="Imagen de Binance">
+            <img src="assets/imgs/ethereum.png" alt="Imagen de Ethereum">
+            <img src="assets/imgs/exodus.png" alt="Imagen de Exodus">
         </div>
-        <div class="footer-section">
-          <h3>Redes</h3>
-          <p>Facebook | Twitter | Instagram</p>
+    </section>
+    
+    <section class="about-section">
+        <h2>Sobre nosotros</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </section>
+    
+    <section class="nft-section">
+        <div class="nft-image">
+            <img src="assets/imgs/tigre.png" alt="NFT Tigre">
         </div>
-      </div>
-      <p class="footer-bottom">Creado por <b>SnowTech</b> | Todos los derechos reservados.</p>
-    </footer>
-    <footer class="footer">
-      <p>Conectado con SnowTech | Redes Sociales</p>
-    </footer>
-  </div>  
+        <div class="nft-text">
+            <h3>Que es un nft</h3>
+            <p>Los NFT o token no fungible, son activos digitales únicos que no se pueden cambiar entre sí, ya que no hay dos iguales, los NFT utilizan la misma tecnología que las criptomonedas, lo que los diferencia, es los códigos de dichos contratos inteligentes. A través de estos token las personas pueden hacer que todo lo que se pueda representar digitalmente se convierta en un NFT, desde un simple tuit hasta una obra de arte.</p>
+            <button class="btn-gradient">Leer más</button>
+        </div>
+    </section>
+    
+    <section class="collections-section">
+        <h2>Colecciones</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <button class="btn-gradient">Explorar</button>
+    </section>
+</div>
