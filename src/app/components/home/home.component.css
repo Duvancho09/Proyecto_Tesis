@@ -6,35 +6,6 @@
     font-family: Arial, sans-serif;
   }
 
-.hero-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 50px;
-}
-
-.hero-left {
-    width: 45%;
-    color: white;
-}
-
-.hero-left h1 {
-    font-size: 32px;
-    font-weight: bold;
-}
-
-.hero-buttons {
-    margin: 20px 0;
-}
-
-.hero-buttons button {
-    padding: 10px 20px;
-    margin-right: 10px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
 .btn-white {
     background: white;
     color: black;
@@ -45,24 +16,23 @@
     color: white;
 }
 
-.hero-logos img {
-    height: 40px;
-    margin: 10px;
-}
-
 .hero-right {
-    width: 70%;
-}
-
-.image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    width: 100%;
+    justify-items: right;
 }
 
-.image-grid img {
+.big-image{
     width: 100%;
+    height: 100%;
+}
+
+.big-image img {
+    height: 100%;
+    width: 70%;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .about-section {
@@ -141,22 +111,12 @@
     cursor: pointer;
 }
 
-.btn-white {
-    background: white;
-    color: black;
-}
-
-.btn-red {
-    background: red;
-    color: white;
-}
-
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    /* grid-template-rows: repeat(3, 1fr); */
     gap: 15px;
-    width: 50%;
+    /* width: 50%; */
 }
 
 .image-grid img {
@@ -171,6 +131,7 @@
 }
 
 .logos img {
-    height: 40px;
+    height: 60px;
+    width: 400px;
 } 
 
