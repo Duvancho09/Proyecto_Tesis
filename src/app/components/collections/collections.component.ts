@@ -1,13 +1,15 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from '../bars/navbar/navbar.component';
+import { ElementRef, QueryList, ViewChildren, AfterViewInit } from '@angular/core';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { SidenavComponent } from '../bars/sidenav/sidenav.component';
 
 const enterTransition = transition(':enter', [
   query('.animacion-entrada', [
   style({ transform: 'translateY(100%)',
-  opacity: 0 }),
+    opacity: 0 }),
   stagger(100, [
     animate('0.5s ease-in', style({ transform: 'translateY(0)', opacity: 1}))
   ])
@@ -19,7 +21,7 @@ const translateY = trigger('translateY', [enterTransition])
 @Component({
   selector: 'app-collections',
   standalone: true,
-  imports: [NgFor, CommonModule, FormsModule, NavbarComponent],
+  imports: [NgFor, CommonModule, FormsModule, NavbarComponent, SidenavComponent, ReactiveFormsModule],
   templateUrl: './collections.component.html',
   styleUrl: './collections.component.css',
   animations: [translateY]
@@ -30,6 +32,8 @@ export class CollectionsComponent {
   currentPage: number = 1;
   itemsPerPage: number = 9;
   activeCategory: string = 'all';
+  visibleImages: any[] = [];
+  @ViewChildren('imageCard', { read: ElementRef }) imageCards!: QueryList<ElementRef>;
 
   images = [
     { name: 'Yellow Painting', category: 'art', author: 'Artist1', url: 'assets/imgs/aro.jpg' },
@@ -79,6 +83,31 @@ export class CollectionsComponent {
     if (this.currentPage > 1) {
       this.currentPage--;
     }
+  }
+
+  ngAfterViewInit() {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const image = this.images.find(img =>
+            entry.target.querySelector('img')?.getAttribute('src') === img.url
+          );
+          if (image && !this.visibleImages.includes(image)) {
+            this.visibleImages.push(image);
+          }
+          observer.unobserve(entry.target); // solo mostrar animación una vez
+        }
+      });
+    }, { threshold: 0.1 });
+  
+    this.imageCards.changes.subscribe(() => {
+      this.imageCards.forEach(card => observer.observe(card.nativeElement));
+    });
+  
+    // observar los primeros al cargar
+    setTimeout(() => {
+      this.imageCards.forEach(card => observer.observe(card.nativeElement));
+    });
   }
 
 }

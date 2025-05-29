@@ -1,1 +1,116 @@
-<p>edit-profile works!</p>
+<navbar/>
+<!-- <div class="profile-container">
+    <div class="banner">
+      <img src="assets/imgs/Fondo.png" alt="Banner" class="banner-img" />
+    </div>
+  
+    <div class="profile-picture-container">
+      <label for="fileInput" class="upload-label">
+        <img [src]="profileImage || 'assets/imgs/perfil.png'" alt="Perfil" class="profile-picture" />
+        <button class="upload-btn">subir foto</button>
+      </label>
+      <input type="file" id="fileInput" hidden (change)="onFileSelected($event)" />
+    </div>
+  
+    <div class="info-section">
+      <h2>información</h2>
+      <div class="info-grid">
+        <div class="input-group">
+          <label>Nombre completo</label>
+          <input type="text" [(ngModel)]="formData.fullName" />
+        </div>
+        <div class="input-group">
+          <label>Nombre de usuario</label>
+          <input type="text" [(ngModel)]="formData.username" />
+        </div>
+        <div class="input-group wide">
+          <label>Descripción</label>
+          <textarea [(ngModel)]="formData.description"></textarea>
+        </div>
+        <div class="input-group">
+          <label>Facebook</label>
+          <input type="text" [(ngModel)]="formData.facebook" />
+        </div>
+        <div class="input-group">
+          <label>Instagram</label>
+          <input type="text" [(ngModel)]="formData.instagram" />
+        </div>
+      </div>
+    </div>
+  </div>   -->
+
+  <div class="profile-container">
+      <img src="assets/imgs/Fondo.png" alt="Banner" class="banner-img" />
+    
+      <div class="profile-picture-wrapper">
+        <label for="fileInput">
+          <img [src]="profileImage" alt="Foto de perfil" class="profile-picture" />
+        </label>
+        <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden />
+      </div>
+    
+      <button class="upload-btn" (click)="triggerFileInput()">SUBIR FOTO</button>
+    
+      <div class="info-section">
+        <h2>INFORMACIÓN</h2>
+        <div class="underline"></div>
+        <form [formGroup]="dateProfileForm" (ngSubmit)="guardarDatos()">
+          <div class="row">
+            <div class="column">
+              <label>Nombres</label>
+              <input type="text" formControlName="name" placeholder="Nombres" autocomplete="off" required>
+            </div>
+            <div class="column">
+              <label>Apellidos</label>
+              <input type="text" formControlName="lastname" placeholder="Apellidos" autocomplete="off" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column">
+              <label>Nombre de usuario</label>
+              <input type="text" formControlName="username" placeholder="Nombre de usuario" autocomplete="off" required>
+            </div>
+            <div class="column">
+              <label>Correo electronico</label>
+              <input type="text" formControlName="email" placeholder="Correo electronico" autocomplete="off" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column">
+              <label>Número</label>
+              <input type="text" formControlName="number" placeholder="Numero de telefono" autocomplete="off" required>
+            </div>
+            <div class="column">
+              <label>Ciudad</label>
+              <input type="text" formControlName="city" placeholder="Ciudad" autocomplete="off" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column">
+              <label>Dirección</label>
+              <input type="text" formControlName="address" placeholder="Dirección" autocomplete="off" required>
+            </div>
+            <div class="column">
+              <label>Descripción del perfil</label>
+              <input type="text" formControlName="descriptionProfile" placeholder="Descripción del perfil" autocomplete="off" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column">
+              <label>Facebook</label>
+              <input type="text" formControlName="facebook" placeholder="URL del facebook" autocomplete="off" required>
+            </div>
+            <div class="column">
+              <label>Instagram</label>
+              <input type="text" formControlName="instagram" placeholder="URL de instagram" autocomplete="off" required>
+            </div>
+          </div>
+          <div class="underline1"></div>
+        </form>
+      </div>
+    </div>  
+  <sidenav/>

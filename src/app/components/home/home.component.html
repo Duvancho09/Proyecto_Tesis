@@ -1,56 +1,127 @@
 <navbar/>
-<div class="container">
-    <section class="hero">
+<div class="container" @translateY>
+  <section class="hero">
     <div class="hero-content">
-        <div class="text-area">
-            <h1>Crea, vende y recolecta tus nft favoritos en esta comunidad en español.</h1>
-            <div class="buttons">
-                <button class="btn-white">Vende NFT</button>
-                <button class="btn-red">Explorar más</button>
-            </div>
+      <div class="text-area">
+        <h1>Crea, vende y recolecta tus nft favoritos en esta comunidad en español.</h1>
+        <div class="buttons">
+          <button class="btn-white">Vende NFT</button>
+          <button class="btn-red">Explorar más</button>
         </div>
-        
-        <div class="hero-right">
+      </div>
+      
+      <div class="hero-right">
         <div class="image-grid">
-            <img src="assets/imgs/azul.png" alt="">
-            <img src="assets/imgs/modelo.jpg" alt="">
-            <img src="assets/imgs/verde.png" alt="">
-            <img src="assets/imgs/cerebro.jpg" alt="">
-            <img src="assets/imgs/mujer.png" alt="">
-            <img src="assets/imgs/conejo.jpg" alt="">
+          <img src="assets/imgs/azul.png" alt="">
+          <img src="assets/imgs/modelo.jpg" alt="">
+          <img src="assets/imgs/verde.png" alt="">
+          <img src="assets/imgs/cerebro.jpg" alt="">
+          <img src="assets/imgs/mujer.png" alt="">
+          <img src="assets/imgs/conejo.jpg" alt="">
         </div>
         <div class="big-image">
-            <img src="assets/imgs/cilindros.jpg" alt="Imagen grande">
+          <img src="assets/imgs/cilindros.jpg" alt="Imagen grande">
         </div>
-        </div>
+      </div>
     </div>
-
+    
     <div class="logos">
-        <img src="assets/imgs/binance.png" alt="Binance">
-        <img src="assets/imgs/ethereum.png" alt="Ethereum">
-        <img src="assets/imgs/exodus.png" alt="Exodus">
+      <img src="assets/imgs/binance.png" alt="Binance">
+      <img src="assets/imgs/ethereum.png" alt="Ethereum">
+      <img src="assets/imgs/exodus.png" alt="Exodus">
     </div>
-</section>
-    
-    <section class="about-section">
-        <h2>Sobre nosotros</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </section>
-    
-    <section class="nft-section">
-        <div class="nft-image">
-            <img src="assets/imgs/tigre.png" alt="NFT Tigre">
+  </section>
+  
+  <section class="about-section">
+    <h2>Sobre nosotros</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  </section>
+  
+  <section class="nft-section">
+    <div class="nft-image">
+      <img src="assets/imgs/tigre.png" alt="NFT Tigre">
+    </div>
+    <div class="nft-text">
+      <h3>Que es un nft</h3>
+      <p>Los NFT o token no fungible, son activos digitales únicos que no se pueden cambiar entre sí, ya que no hay dos iguales, los NFT utilizan la misma tecnología que las criptomonedas, lo que los diferencia, es los códigos de dichos contratos inteligentes. A través de estos token las personas pueden hacer que todo lo que se pueda representar digitalmente se convierta en un NFT, desde un simple tuit hasta una obra de arte.</p>
+      <button class="btn-gradient">Leer más</button>
+    </div>
+  </section>
+  
+  <section class="collections-section">
+    <h2>Colecciones</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <button class="btn-gradient">Explorar</button>
+  </section>
+  
+  <section class="gallery animacion-entrada">
+    <div class="image-card" *ngFor="let image of filteredImages">
+      <img class="imagen" [src]="image.url" [alt]="image.name">
+      <p class="image-title">&#64;{{ image.author }}</p>
+      <p class="image-category">{{ image.name }}</p>
+      <p class="image-price">0.005 ETH</p>
+      <button class="detail-btn">Ver detalles</button>
+    </div>
+  </section>
+  
+  <section class="highlights-section">
+    <h2>Destacados</h2>
+    <p>En esta sección se mostraran las colecciones destacadas.</p>
+  </section>
+  
+  <section class="gallery2 animacion-entrada">
+    <div class="image-card2" *ngFor="let image of filteredImages1">
+      <img class="imagen2" [src]="image.url" [alt]="image.name">
+      <p class="image-title2">&#64;{{ image.author }}</p>
+      <p class="image-category">{{ image.name }}</p>
+      <p class="image-price2">0.005 ETH</p>
+      <button class="detail-btn2">Ver detalles</button>
+    </div>
+  </section>
+  
+  <section class="topcreator-section">
+    <h2>Top de creadores</h2>
+    <p>En esta sección se mostraran los creadores mas destacados.</p>
+  </section>
+  
+  <section class="gallery3 animacion-entrada">
+    <div class="profile-card" *ngFor="let image of filteredImages2">
+      <img class="cover" [src]="image.cover" [alt]="image.name">
+      <img class="avatar" [src]="image.avatar" alt="Imagen del perfil del usuario">
+      <h3>{{ image.name }}</h3>
+      <p class="description">{{ image.description }}</p>
+      <button class="detail-btn2">+ SEGUIR</button>
+    </div>
+  </section>
+  
+  <section class="ask-section">
+    <h2>Preguntanos</h2>
+    <p class="subtext">¿Tienes alguna duda?</p>
+
+    <div class="ask-container">
+      <div class="ask-row" *ngFor="let ask of asks; let i = index">
+        <div class="ask-question" (click)="toggle(i)">
+          <span>{{ ask.question }}</span>
+          <span class="plus-icon">{{ openedIndex === i ? '-' : '+' }}</span>
         </div>
-        <div class="nft-text">
-            <h3>Que es un nft</h3>
-            <p>Los NFT o token no fungible, son activos digitales únicos que no se pueden cambiar entre sí, ya que no hay dos iguales, los NFT utilizan la misma tecnología que las criptomonedas, lo que los diferencia, es los códigos de dichos contratos inteligentes. A través de estos token las personas pueden hacer que todo lo que se pueda representar digitalmente se convierta en un NFT, desde un simple tuit hasta una obra de arte.</p>
-            <button class="btn-gradient">Leer más</button>
+        <div class="ask-answer-wrapper" [class.open]="openedIndex === i">
+          <div class="ask-answer">
+            {{ ask.answer }}
+          </div>
         </div>
-    </section>
-    
-    <section class="collections-section">
-        <h2>Colecciones</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <button class="btn-gradient">Explorar</button>
-    </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="begin-section">
+    <div class="begin-box">
+      <h2>¿Estás listo para crear y coleccionar tus NFT?</h2>
+      <a href="/createNFT" aria-label="link de crearNFT">
+        <button class="begin-button" aria-label="boton para crearNFT">
+          COMENZAR
+        </button>
+      </a>
+    </div>
+  </section>
 </div>
+<sidenav/>

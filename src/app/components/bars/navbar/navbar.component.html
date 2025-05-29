@@ -1,32 +1,91 @@
 <header class="header" @translateY>
-  <div class="logo animacion-entrada">
-    <a href="/home">
-      <button>
-        Snow<span class="highlight">Tech</span>
-      </button>
-    </a>
+  <div class="header-container">
+    <div class="logo animacion-entrada">
+      <a href="/home">
+        <button>
+          Snow<span class="highlight">Tech</span>
+        </button>
+      </a>
     </div>
-    <!-- Barra de búsqueda -->
+    
+    <button class="menu-toggle" (click)="toggleMobileMenu()"> ☰ </button>
+
     <div class="search-container animacion-entrada">
       <span class="search-icon">🔍</span>
       <input type="text" placeholder="Encuentra colecciones y artículos" [(ngModel)]="searchText" (input)="onSearch()">
     </div>
-
+    
     <div class="dropdown animacion-entrada">
-      <button class="dropbtn" (click)="toggleDropdown()">CATEGORIAS ⏷</button>
+      <button class="dropbtn" (click)="toggleDropdown()">MENÚ ⏷</button>
       <div class="dropdown-content animacion-entrada" [class.show]="dropdownOpen">
-        <a (click)="filterByCategory('art')">Arte</a>
-        <a (click)="filterByCategory('music')">Música</a>
-        <a (click)="filterByCategory('photography')">Fotografía</a>
-        <a (click)="filterByCategory('sculpture')">Escultura</a>
+        <!-- <a href="/collections" aria-label="link de colecciones">
+          <button class="dropbtn" aria-label="boton de colecciones">
+              Colecciones
+          </button>
+        </a> -->
+        <a href="/createNFT" aria-label="link de crear">
+          <button class="dropbtn" aria-label="boton de crear">
+            Crear NFT
+          </button>
+        </a>
+        <a href="/buyNFT" aria-label="link de comprar NFT">
+          <button class="dropbtn" aria-label="boton de comprar">
+            Comprar NFT
+          </button>
+        </a>
+        <a href="/collections" aria-label="link de categorias">
+          <button class="dropbtn" aria-label="boton de categorias">
+            Categorias
+          </button>
+        </a>
       </div>
     </div>
-
+    
     <button class="wallet-btn animacion-entrada">Conectar Wallet</button>
-
+    
     <div class="profile-icon animacion-entrada">
       <a href="/editProfile" aria-label="enlace para entrar a editar el perfil">
         <img src="assets/imgs/perfil.png" alt="Perfil">
       </a>
     </div>
+  </div>
+  
+  <div class="mobile-menu" [class.show]="isMobileMenuOpen">
+    <div class="search-container mobile">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Buscar..." [(ngModel)]="searchText" (input)="onSearch()">
+    </div>
+    
+    <button class="dropbtn" (click)="toggleDropdown1()" #toggleBtn>MENÚ ⏷</button>
+    <div class="dropdown-content" [class.show]="dropdownOpen1">
+      <!-- <a href="/collections" aria-label="link de colecciones">
+          <button class="dropbtn" aria-label="boton de colecciones">
+              Colecciones
+          </button>
+        </a> -->
+        <a href="/createNFT" aria-label="link de crear">
+          <button class="dropbtn" aria-label="boton de crear">
+            Crear NFT
+          </button>
+        </a>
+        <a href="/buyNFT" aria-label="link de comprar NFT">
+          <button class="dropbtn" aria-label="boton de comprar">
+            Comprar NFT
+          </button>
+        </a>
+        <a href="/collections" aria-label="link de categorias">
+          <button class="dropbtn" aria-label="boton de categorias">
+            Categorias
+          </button>
+        </a>
+    </div>
+    
+    <button class="wallet-btn">Conectar Wallet</button>
+    <a class="perfil" href="/editProfile" aria-label="link de perfil">
+      <button class="btnperfil" aria-label="boton de perfil">
+        Perfil
+      </button>
+    </a>
+  </div>
+  
 </header>

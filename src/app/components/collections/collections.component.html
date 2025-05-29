@@ -13,8 +13,8 @@
     <button (click)="filterByCategory('sculpture')" [class.active]="activeCategory === 'sculpture'">Escultura</button>
   </section>
   
-  <section class="gallery animacion-entrada">
-    <div class="image-card" *ngFor="let image of filteredImages">
+  <section class="gallery">
+    <div class="image-card" *ngFor="let image of filteredImages" [class.visible]="visibleImages.includes(image)" #imageCard>
       <img class="imagen" [src]="image.url" [alt]="image.name">
       <p class="image-title">&#64;{{ image.author }}</p>
       <p class="image-category">{{ image.name }}</p>
@@ -28,25 +28,5 @@
     <span>{{ currentPage }}/{{ totalPages }}</span>
     <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente →</button>
   </div>
-  
-  <footer class="footer animacion-entrada">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>SnowTech</h3>
-        <p>Explora, descubre y colecciona arte digital único.</p>
-      </div>
-      <div class="footer-section">
-        <h3>Compañía</h3>
-        <p>Acerca de | Política | Términos</p>
-      </div>
-      <div class="footer-section">
-        <h3>Redes</h3>
-        <p>Facebook | Twitter | Instagram</p>
-      </div>
-    </div>
-    <p class="footer-bottom">Creado por <b>SnowTech</b> | Todos los derechos reservados.</p>
-  </footer>
-  <footer class="footer">
-    <p>Conectado con SnowTech | Redes Sociales</p>
-  </footer>
-</div>  
+</div>
+<sidenav/>

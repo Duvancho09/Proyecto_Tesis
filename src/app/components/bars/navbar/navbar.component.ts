@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Router } from '@angular/router';
@@ -27,7 +27,9 @@ const translateY = trigger('translateY', [enterTransition])
 export class NavbarComponent {
   searchText: string = '';
   dropdownOpen: boolean = false;
-
+  isMobileMenuOpen = false;
+  dropdownOpen1 = false;
+  
   @Output() searchEvent = new EventEmitter<string>();
 
   constructor(private router: Router){}
@@ -40,12 +42,15 @@ export class NavbarComponent {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-  filterByCategory(category: string) {
-    console.log(`Filtrando por categoría: ${category}`);
-  }
-
   filterImages() {
     console.log(`Filtrando imágenes por: ${this.searchText}`);
   }
 
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+  
+  toggleDropdown1() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
 }
