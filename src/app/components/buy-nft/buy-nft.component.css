@@ -1,0 +1,159 @@
+/* --- Contenedor Principal --- */
+.buy-experience {
+  min-height: 100vh;
+  padding-top: 80px;
+  color: white;
+}
+
+/* --- Tarjeta del NFT (Izquierda) --- */
+.nft-glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+.nft-glass-card:hover {
+  transform: translateY(-10px) rotate(1deg);
+}
+
+.nft-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.main-img {
+  width: 100%;
+  border-radius: 20px;
+  transition: transform 0.5s ease;
+}
+
+.nft-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0,0,0,0.6);
+  color: #00f2fe;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  border: 1px solid #00f2fe;
+}
+
+/* --- Textos de Información (Derecha) --- */
+h1.display-4 {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+/* ARREGLO DEL "BY" */
+.artist-mention {
+  color: #ffffff !important; 
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #00f2fe, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+/* Caja de Precio y Subastas */
+.glass-info-box {
+  background: rgba(255, 255, 255, 0.12) !important;
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+}
+
+.glass-info-box label {
+  color: #ffffff !important;
+  opacity: 0.9;
+}
+
+.eth-price {
+  color: #00f2fe;
+  font-weight: 800;
+}
+
+/* Descripción */
+.nft-description {
+  color: #ffffff !important;
+  margin-top: 20px;
+  line-height: 1.6;
+  opacity: 1 !important;
+}
+
+/* --- Botón de Compra --- */
+.btn-glow-purchase {
+  background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+  border: none;
+  padding: 18px;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+  transition: all 0.3s;
+}
+
+.btn-glow-purchase:hover {
+  box-shadow: 0 0 35px rgba(0, 242, 254, 0.6);
+  transform: scale(1.02);
+}
+
+/* --- MÉTODOS DE PAGO (PSE Y EFECTY ARREGLADOS) --- */
+.payment-card {
+  background: rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.payment-card:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: #00f2fe;
+}
+
+/* Quitamos el filtro que ponía los logos negros */
+.payment-card img {
+  height: 35px !important;
+  width: auto;
+  display: block;
+  margin: 0 auto 10px;
+  filter: none !important; 
+}
+
+.payment-card i {
+  font-size: 30px;
+  color: #00f2fe;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.payment-card span {
+  color: #ffffff !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* --- Detalles (ID y Blockchain) --- */
+.small-id, .blockchain-tag {
+  color: #00f2fe !important;
+  font-weight: bold;
+}
+
+.nft-card-footer p {
+  color: #ffffff !important;
+  margin-bottom: 2px;
+}

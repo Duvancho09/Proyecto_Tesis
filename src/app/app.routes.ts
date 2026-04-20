@@ -16,7 +16,7 @@ export const routes: Routes = [
     { path: "home", component: HomeComponent },
     { path: "editProfile", component: EditProfileComponent },
     { path: "collections", component: CollectionsComponent },
-    { path: "buyNFT", component: BuyNFTComponent },
+    { path: "buyNFT/:name", component: BuyNFTComponent },
     { path: "createNFT", component: CreateNFTComponent },
     { path: "profile", component: ProfileComponent }
 ];

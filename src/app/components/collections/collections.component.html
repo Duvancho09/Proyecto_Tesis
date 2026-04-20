@@ -19,7 +19,7 @@
       <p class="image-title">&#64;{{ image.author }}</p>
       <p class="image-category">{{ image.name }}</p>
       <p class="image-price">0.005 ETH</p>
-      <button class="detail-btn">Ver detalles</button>
+      <button class="detail-btn" (click)="verDetalles(image.name)">Ver detalles</button>
     </div>
   </section>
   

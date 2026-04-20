@@ -1,1 +1,110 @@
-<p>create-nft works!</p>
+<navbar/>
+<div class="main-container">
+  <div class="container py-5 content-wrapper">
+    
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <h2 class="title-main">Sube tú obra de arte</h2>
+        <div class="upload-box my-4" (click)="fileInput.click()">
+          <input type="file" #fileInput style="display: none" accept="image/*,.pdf,.svg,.gif" (change)="onFileSelected($event)">
+          <div class="upload-content" *ngIf="!imagePreview">
+            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+            <h3 class="click-text">Click para subir</h3>
+          </div>
+          <div class="preview-container" *ngIf="imagePreview">
+            <img [src]="imagePreview" alt="Preview" class="img-fluid rounded preview-img">
+            <p class="mt-2 text-muted">Haz clic para cambiar la imagen</p>
+          </div>
+          <div class="upload-footer" *ngIf="!imagePreview">
+            <p>Recomendación: Usa una alta calidad JPG, JPEG, SVG, PNG, GIF, TIFF o WEBP menor a 20MB</p>
+          </div>
+        </div>
+        <p class="subtitle-low">SUBE TU ARCHIVO AQUÍ</p>
+      </div>
+    </div>
+
+    <div class="info-section mt-5">
+      <h2 class="info-title">Información de tú creación</h2>
+      <hr class="line-separator">
+
+      <div class="row mt-5 gx-5">
+        <div class="col-md-5">
+          <div class="input-container">
+            <label>Nombre de la creación</label>
+            <div class="input-line">
+              <input type="text" placeholder="La Marsellesa" [(ngModel)]="itemName">
+              <span>+</span>
+            </div>
+          </div>
+          
+          <div class="input-container mt-5">
+            <label>Descripción</label>
+            <p class="desc-help">Imagen que identifica el himno y la pasión que se tiene por Francia</p>
+            <div class="input-line">
+              <textarea rows="1" [(ngModel)]="itemDescription"></textarea>
+              <span>+</span>
+            </div>
+          </div>
+
+          <div class="input-container mt-5">
+            <label>Artista</label>
+            <div class="input-line">
+              <input type="text" placeholder="@TuUsuario" [(ngModel)]="artistName">
+              <span>+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-5 offset-md-2">
+          <div class="input-container">
+            <label>suministrar</label>
+            <div class="input-line">
+              <input type="number" [(ngModel)]="itemSupply">
+              <span>+</span>
+            </div>
+          </div>
+
+          <div class="input-container mt-5">
+            <label>Precio (ETH)</label>
+            <div class="input-line">
+              <input type="text" placeholder="0.005 ETH" [(ngModel)]="itemPrice">
+              <span>+</span>
+            </div>
+          </div>
+
+          <div class="input-container mt-5">
+            <label>External Link</label>
+            <div class="input-line">
+              <input type="text" placeholder="https://codepen.com/..." [(ngModel)]="itemExternalLink">
+              <span>+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5 justify-content-center">
+        <div class="col-md-4 text-center">
+          <div class="input-container">
+            <label class="d-block mb-2">Blockchain</label>
+            <div class="input-line justify-content-center custom-select-wrapper">
+              <select class="select-clean" [(ngModel)]="itemBlockchain">
+                <option value="ethereum">ethereum</option>
+                <option value="polygon">polygon</option>
+                <option value="blockchain">blockchain</option>
+              </select>
+              <span class="ms-2 arrow-icon">▼</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5 pt-4 border-top-thin">
+        <div class="col-12 d-flex justify-content-end align-items-center">
+          <button class="btn-gradient-submit" (click)="uploadFile()">Subir tu creación</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<sidenav/>

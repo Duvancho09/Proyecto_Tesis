@@ -2,9 +2,12 @@ import { CommonModule, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from '../bars/navbar/navbar.component';
-import { ElementRef, QueryList, ViewChildren, AfterViewInit } from '@angular/core';
+import { ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { SidenavComponent } from '../bars/sidenav/sidenav.component';
+import { NftDataService } from '../../services/nft-data.service';
+import { OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 const enterTransition = transition(':enter', [
   query('.animacion-entrada', [
@@ -26,7 +29,7 @@ const translateY = trigger('translateY', [enterTransition])
   styleUrl: './collections.component.css',
   animations: [translateY]
 })
-export class CollectionsComponent {
+export class CollectionsComponent implements OnInit{
   searchText: string = '';
   selectedCategory: string = 'all';
   currentPage: number = 1;
@@ -34,6 +37,20 @@ export class CollectionsComponent {
   activeCategory: string = 'all';
   visibleImages: any[] = [];
   @ViewChildren('imageCard', { read: ElementRef }) imageCards!: QueryList<ElementRef>;
+
+  constructor(private nftService: NftDataService, private router: Router){}
+
+  ngOnInit() {
+    this.nftService.getNfts().subscribe(newsNfts => {
+      if(newsNfts && newsNfts.length > 0){
+        const idsExistentes = new Set(this.images.map(img => img.name + img.url));
+        const unicos = newsNfts.filter(n => !idsExistentes.has(n.name + n.url));
+
+        this.images = [...unicos, ...this.images];
+        this.filterImages();
+      }
+    });
+  }
 
   images = [
     { name: 'Yellow Painting', category: 'art', author: 'Artist1', url: 'assets/imgs/aro.jpg' },
@@ -95,7 +112,7 @@ export class CollectionsComponent {
           if (image && !this.visibleImages.includes(image)) {
             this.visibleImages.push(image);
           }
-          observer.unobserve(entry.target); // solo mostrar animación una vez
+          observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1 });
@@ -104,10 +121,13 @@ export class CollectionsComponent {
       this.imageCards.forEach(card => observer.observe(card.nativeElement));
     });
   
-    // observar los primeros al cargar
     setTimeout(() => {
       this.imageCards.forEach(card => observer.observe(card.nativeElement));
     });
+  }
+
+  verDetalles(nombre: string){
+    this.router.navigate(['/buyNFT', nombre]);
   }
 
 }

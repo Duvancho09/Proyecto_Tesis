@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../bars/navbar/navbar.component';
 import { SidenavComponent } from '../bars/sidenav/sidenav.component';
+import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [NavbarComponent, SidenavComponent],
+  imports: [EditProfileComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
+
+  constructor(){}
 
   profileImage: string = 'assets/imgs/perfil.png';
 
