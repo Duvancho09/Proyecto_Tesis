@@ -30,11 +30,7 @@ export class CreateNFTComponent {
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result;
-      }
-      reader.readAsDataURL(file);
+      this.imagePreview = URL.createObjectURL(file);
     }
 
   }
@@ -57,6 +53,8 @@ export class CreateNFTComponent {
       url: this.imagePreview,
       category: 'art',
       price: this.itemPrice || '0.00 ETH',
+      blockchain: this.itemBlockchain,
+      auctions: this.itemSupply ? Number(this.itemSupply) : 1
     };
 
     this.nftService.addNft(newNFT);

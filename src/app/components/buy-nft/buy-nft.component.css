@@ -157,3 +157,21 @@ h1.display-4 {
   color: #ffffff !important;
   margin-bottom: 2px;
 }
+
+.eth-price {
+  font-size: clamp(1.2rem, 4vw, 2.2rem); 
+  color: #00d2ff;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: block;
+  max-width: 100%;
+}
+
+.text-info {
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  opacity: 0.8;
+  word-wrap: break-word;
+}

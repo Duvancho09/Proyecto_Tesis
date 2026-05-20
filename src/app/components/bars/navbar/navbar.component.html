@@ -16,21 +16,19 @@
     </div>
     
     <div class="dropdown animacion-entrada">
-      <button class="dropbtn" (click)="toggleDropdown()">MENÚ ⏷</button>
+      <button class="dropbtn" (click)="toggleDropdown()" style="position: relative;">MENÚ ⏷
+        <span *ngIf="tieneNotificacion" class="punto-notificacion"></span>
+      </button>
       <div class="dropdown-content animacion-entrada" [class.show]="dropdownOpen">
-        <!-- <a href="/collections" aria-label="link de colecciones">
-          <button class="dropbtn" aria-label="boton de colecciones">
-              Colecciones
-          </button>
-        </a> -->
         <a href="/createNFT" aria-label="link de crear">
           <button class="dropbtn" aria-label="boton de crear">
             Crear NFT
           </button>
         </a>
-        <a href="/buyNFT" aria-label="link de comprar NFT">
-          <button class="dropbtn" aria-label="boton de comprar">
-            Comprar NFT
+        <a href="/cart" aria-label="link de carrito">
+          <button class="dropbtn" aria-label="boton de carrito" style="margin-right: 25px;">
+            🛒 Carrito
+            <span *ngIf="cantidadCarrito > 0" class="carrito-badge">{{ cantidadCarrito }}</span>
           </button>
         </a>
         <a href="/collections" aria-label="link de categorias">
@@ -68,9 +66,9 @@
             Crear NFT
           </button>
         </a>
-        <a href="/buyNFT" aria-label="link de comprar NFT">
-          <button class="dropbtn" aria-label="boton de comprar">
-            Comprar NFT
+        <a href="/cart" aria-label="link de carrito">
+          <button class="dropbtn" aria-label="boton de carrito">
+            🛒 Carrito <span class="badge-movil">(0)</span>
           </button>
         </a>
         <a href="/collections" aria-label="link de categorias">

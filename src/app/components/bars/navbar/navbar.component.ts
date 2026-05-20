@@ -3,6 +3,7 @@ import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Router } from '@angular/router';
+import { CartService } from '../../../services/cart.service';
 
 const enterTransition = transition(':enter', [
   query('.animacion-entrada', [
@@ -29,10 +30,19 @@ export class NavbarComponent {
   dropdownOpen: boolean = false;
   isMobileMenuOpen = false;
   dropdownOpen1 = false;
+  cantidadCarrito: number = 0;
+  tieneNotificacion: boolean = false;
   
   @Output() searchEvent = new EventEmitter<string>();
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private cartService: CartService){}
+
+  ngOnInit(){
+    this.cartService.cartCount$.subscribe(valor => {
+      this.cantidadCarrito = valor;
+      this.tieneNotificacion = valor > 0;
+    });
+  }
 
   onSearch(){
     this.searchEvent.emit(this.searchText);
@@ -52,5 +62,10 @@ export class NavbarComponent {
   
   toggleDropdown1() {
     this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  simularAñadir(){
+    this.cantidadCarrito++;
+    this.tieneNotificacion = true;
   }
 }

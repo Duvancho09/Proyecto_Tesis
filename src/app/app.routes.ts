@@ -8,6 +8,7 @@ import { CollectionsComponent } from './components/collections/collections.compo
 import { BuyNFTComponent } from './components/buy-nft/buy-nft.component';
 import { CreateNFTComponent } from './components/create-nft/create-nft.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { CartComponent } from './components/cart/cart.component';
 
 export const routes: Routes = [
     { path: "", component: LoginComponent },
@@ -18,5 +19,6 @@ export const routes: Routes = [
     { path: "collections", component: CollectionsComponent },
     { path: "buyNFT/:name", component: BuyNFTComponent },
     { path: "createNFT", component: CreateNFTComponent },
-    { path: "profile", component: ProfileComponent }
+    { path: "profile", component: ProfileComponent },
+    { path: "cart", component: CartComponent }
 ];

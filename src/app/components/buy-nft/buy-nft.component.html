@@ -25,24 +25,52 @@
 
       <div class="col-lg-7 mt-5 mt-lg-0">
         <h1 class="display-4 fw-bold text-white">{{nft.name}}</h1>
-        <p class="artist-mention">By <span class="gradient-text">&#64;</span><span class="gradient-text" [textContent]="nft?.author"></span>
+<p class="artist-mention">By <span class="gradient-text">&#64;</span><span class="gradient-text">{{nft?.author}}</span></p>
+
+<div class="glass-info-box mt-4">
+  <div class="row align-items-center">
+    <div class="col-8 d-flex flex-column justify-content-center">
+      <label class="text-white-50 small">Precio total</label>
+      <h2 class="eth-price mb-0">{{ precioTotalCalculado | number:'1.0-2' }}</h2>
+      <small class="text-info">({{ nft?.price | number:'1.0-2' }} c/u)</small>
+    </div>
+    
+    <div class="col-4 border-start border-secondary">
+  <div class="d-flex flex-column ps-3">
+    <label class="text-white-50 small">Obras disponibles: {{ nft?.auctions || 0 }}</label>
+    
+    <div class="mt-2">
+      <label class="d-block small text-white-50 mb-1">Selecciona cantidad:</label>
+      
+      <div class="d-flex align-items-center gap-2">
+        <button type="button" class="btn btn-outline-info btn-sm" (click)="cambiarCantidad(-1)">-</button>
         
-        <div class="glass-info-box mt-4">
-          <div class="row">
-            <div class="col-6">
-              <label>Precio actual</label>
-              <h2 class="eth-price" [textContent]="nft?.price"></h2>
-            </div>
-            <div class="col-6 border-start border-secondary">
-              <label>Subastas</label>
-              <h2 class="text-white">12</h2>
-            </div>
-          </div>
+        <div class="px-3 py-1 border border-info rounded text-white" style="min-width: 45px; text-align: center;">
+          {{ cantidadElegida }}
         </div>
+        
+        <button type="button" class="btn btn-outline-info btn-sm" (click)="cambiarCantidad(1)">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
 
         <p class="nft-description mt-4" [textContent]="nft?.description || 'Esta obra exclusiva representa la vanguardia del arte digital en la red.'"></p>
 
-        <button class="btn-glow-purchase w-100 mt-4" (click)="showPayment = !showPayment" [textContent]="showPayment ? 'Cerrar opciones' : 'Comprar ahora'"></button>
+        <div class="row g-3 mt-4">
+  <div class="col-6">
+    <button class="btn-glow-purchase w-100" (click)="showPayment = !showPayment">
+      {{ showPayment ? 'Cerrar' : 'Comprar ahora' }}
+    </button>
+  </div>
+  <div class="col-6">
+    <button class="btn btn-outline-light w-100 h-100 fw-bold" (click)="agregarAlCarrito()" style="border-radius: 12px; border: 2px solid #5d3fd3;">
+      🛒 Añadir
+    </button>
+  </div>
+</div>
 
         <div class="payment-methods-grid mt-4" *ngIf="showPayment">
           <h5 class="text-white mb-3">Selecciona tu método de pago</h5>
