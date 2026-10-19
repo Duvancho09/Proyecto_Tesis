@@ -9,6 +9,16 @@ import { NftDataService } from '../../services/nft-data.service';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+export interface NFT {
+  name: string;
+  category: string;
+  author: string;
+  url: string;
+  price?: string;
+  blockchain?: string;
+  auctions?: number;
+}
+
 const enterTransition = transition(':enter', [
   query('.animacion-entrada', [
   style({ transform: 'translateY(100%)',
@@ -53,15 +63,15 @@ export class CollectionsComponent implements OnInit{
   }
 
   images = [
-    { name: 'Yellow Painting', category: 'art', author: 'Artist1', url: 'assets/imgs/aro.jpg' },
-    { name: 'Blue Artwork', category: 'art', author: 'Artist2', url: 'assets/imgs/cilindros.jpg' },
-    { name: 'Music Beats', category: 'music', author: 'Artist3', url: 'assets/imgs/circulo.jpg' },
-    { name: 'Abstract Colors', category: 'art', author: 'Artist4', url: 'assets/imgs/figuras.jpg' },
-    { name: 'Digital Sound', category: 'music', author: 'Artist5', url: 'assets/imgs/metal.jpg' },
-    { name: 'Sculpture Design', category: 'sculpture', author: 'Artist6', url: 'assets/imgs/moneda.png' },
-    { name: 'Nature Photo', category: 'photography', author: 'Artist7', url: 'assets/imgs/muñeca.png' },
-    { name: 'Modern Art', category: 'art', author: 'Artist8', url: 'assets/imgs/torre.jpg' },
-    { name: 'City Landscape', category: 'photography', author: 'Artist9', url: 'assets/imgs/tubo.jpg' },
+    { name: 'Yellow Painting', category: 'art', author: 'Artist1', url: 'assets/imgs/aro.jpg', price: '0.005 ETH' },
+    { name: 'Blue Artwork', category: 'art', author: 'Artist2', url: 'assets/imgs/cilindros.jpg', price: '0.005 ETH' },
+    { name: 'Music Beats', category: 'music', author: 'Artist3', url: 'assets/imgs/circulo.jpg', price: '0.005 ETH' },
+    { name: 'Abstract Colors', category: 'art', author: 'Artist4', url: 'assets/imgs/figuras.jpg', price: '0.005 ETH' },
+    { name: 'Digital Sound', category: 'music', author: 'Artist5', url: 'assets/imgs/metal.jpg', price: '0.005 ETH' },
+    { name: 'Sculpture Design', category: 'sculpture', author: 'Artist6', url: 'assets/imgs/moneda.png', price: '0.005 ETH' },
+    { name: 'Nature Photo', category: 'photography', author: 'Artist7', url: 'assets/imgs/muñeca.png', price: '0.005 ETH' },
+    { name: 'Modern Art', category: 'art', author: 'Artist8', url: 'assets/imgs/torre.jpg', price: '0.005 ETH' },
+    { name: 'City Landscape', category: 'photography', author: 'Artist9', url: 'assets/imgs/tubo.jpg', price: '0.005 ETH' },
   ];
 
   filteredImages = [...this.images];

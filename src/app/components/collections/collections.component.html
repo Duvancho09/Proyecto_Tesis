@@ -14,11 +14,15 @@
   </section>
   
   <section class="gallery">
+    <div *ngIf="filteredImages.length === 0" class="no-nfts-message">
+      <p>No hay obras registradasaún. ¡Se el primero en minar una!</p>
+    </div>
+    
     <div class="image-card" *ngFor="let image of filteredImages" [class.visible]="visibleImages.includes(image)" #imageCard>
       <img class="imagen" [src]="image.url" [alt]="image.name">
       <p class="image-title">&#64;{{ image.author }}</p>
       <p class="image-category">{{ image.name }}</p>
-      <p class="image-price">0.005 ETH</p>
+      <p class="image-price">{{ image.price }}</p>
       <button class="detail-btn" (click)="verDetalles(image.name)">Ver detalles</button>
     </div>
   </section>
