@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -23,24 +24,62 @@ export class RegisterComponent {
     confirmPassword: new FormControl('', [Validators.required, Validators.maxLength(30)]),
   })
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private userService: UserService){}
 
   register(){
+      const formValues =this.dataRegister.value;
+
+      if(formValues.email !== formValues.confirmEmail){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oopss...',
+          text: 'Los correos electronicos no coinciden.'
+        });
+        return;
+      }
+
+      if(formValues.password !==formValues.confirmPassword){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oopss...',
+          text: 'Las contraseñas no coinciden.'
+        });
+        return;
+      }
+
       if(this.dataRegister.valid){
-        let data = this.dataRegister.value
-        console.log(data);
-        Swal.fire(
-          'Datos registrados correctamente',
-          'Inicia sesión y disfruta de la página y las cosas que trae para ti!!!',
-          'success'
-        )
-        this.router.navigate(['/']);
-      }else{
+        const userData = {
+          nombre: formValues.name,
+          apellido: formValues.lastname,
+          username: formValues.username,
+          email: formValues.email,
+          password_hash: formValues.password,
+          celular: formValues.telephone
+        };
+
+        this.userService.register(userData).subscribe({
+          next: (response) => {
+            Swal.fire(
+              '¡Registro exitoso!',
+              'Tu cuenta ha sido creada con exito. Inicia sesión y disfruta de la página',
+              'success'
+            );
+            this.router.navigate(['/']);
+          },
+          error: (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error en el registro',
+              text: err.error?.message || 'El correo o usuario ya se encuentran registrados.',
+            });
+          }
+        });
+      } else {
         Swal.fire({
           icon: 'error',
           title: 'Por favor revisa todos los campos',
-          text: '¡Los campos estan vacios o no son validos!',
-        })
+          text: '¡Los campos están vacíos o no son válidos!',
+        });
       }
     }
 

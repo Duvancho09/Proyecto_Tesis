@@ -103,3 +103,9 @@ body {
     outline: none;
     font-size: 14px;
   }
+  
+  .buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}

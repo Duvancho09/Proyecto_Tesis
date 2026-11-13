@@ -69,8 +69,37 @@
               <input type="text" formControlName="instagram" placeholder="URL de instagram" autocomplete="off" required>
             </div>
           </div>
+          <div class="buttons-container">
+            <button type="button" *ngIf="!isEditing" (click)="habilitarEdicion()" class="upload-btn">
+              Actualizar Datos
+            </button>
+            <button type="button" *ngIf="isEditing" (click)="guardarDatos()" class="upload-btn">
+              Guardar Cambios
+            </button>
+          </div>
           <div class="underline1"></div>
         </form>
       </div>
-    </div>  
+    </div>
+    <div class="my-purchased-nfts-section" style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+    <h3 style="color: #fff; margin-bottom: 15px;">🎨 Mis Obras Adquiridas</h3>
+
+    <div *ngIf="cargandoCompras" style="color: #aaa;">
+      <p>Cargando tus obras compradas...</p>
+    </div>
+
+    <div class="purchased-grid" *ngIf="!cargandoCompras && misCompras.length > 0" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px;">
+      <div class="purchased-card" *ngFor="let tx of misCompras" style="background: #1e1e2f; padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+        <img *ngIf="tx.nft?.url" [src]="tx.nft.url" [alt]="tx.nft.name" style="width: 100%; height: 140px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+        <p style="color: #4ade80; font-weight: bold; margin: 5px 0;">NFT ID: #{{ tx.nftId }}</p>
+        <p style="color: #fff; margin: 5px 0;">Precio: {{ tx.price }} ETH</p>
+        <p style="color: #aaa; font-size: 11px; word-break: break-all; margin: 5px 0;">Hash: {{ tx.txHash }}</p>
+        <p style="color: #888; font-size: 11px; margin: 5px 0;">Fecha: {{ tx.createdAt | date:'short' }}</p>
+      </div>
+    </div>
+
+    <ng-template #sinCompras>
+      <p style="color: #888;" *ngIf="!cargandoCompras">Aún no has comprado ninguna obra en el marketplace.</p>
+    </ng-template>
+  </div>
   <sidenav/>

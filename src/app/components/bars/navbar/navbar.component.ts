@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, inject, Output, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Router } from '@angular/router';
 import { CartService } from '../../../services/cart.service';
+import Swal from 'sweetalert2';
+import { Web3Service } from '../../../services/web3.service';
+import { UserService } from '../../../services/user.service';
 
 const enterTransition = transition(':enter', [
   query('.animacion-entrada', [
@@ -32,16 +35,46 @@ export class NavbarComponent {
   dropdownOpen1 = false;
   cantidadCarrito: number = 0;
   tieneNotificacion: boolean = false;
+
+  public web3Service = inject(Web3Service);
   
   @Output() searchEvent = new EventEmitter<string>();
 
-  constructor(private router: Router, private cartService: CartService){}
+  constructor(private router: Router, private cartService: CartService, public userService: UserService){}
 
-  ngOnInit(){
+  public cerrarSesionGeneral(): void {
+    localStorage.clear();
+    sessionStorage.clear();
+
+    this.web3Service.logout();
+
+    this.router.navigate(['/'], { replaceUrl: true }).then(() => {
+      window.location.reload();
+    });
+  }
+
+  async ngOnInit(){
     this.cartService.cartCount$.subscribe(valor => {
       this.cantidadCarrito = valor;
       this.tieneNotificacion = valor > 0;
     });
+  }
+
+  async conectarWallet(){
+    const rawAccount = await this.web3Service.connectWallet();
+    const account: string | null = rawAccount ? String(rawAccount): null;
+    if (account){
+      Swal.fire({
+        icon: 'success',
+        title: '¡Wallet Conectada!',
+        text: `Conectado: ${account.substring(0, 6)}...${account.substring(38)}`,
+        background: '#1a1a2e',
+        color: '#fff',
+        confirmButtonColor: '#6a11cb',
+        timer: 3000,
+        showConfirmButton: false
+      });
+    }
   }
 
   onSearch(){
@@ -61,7 +94,7 @@ export class NavbarComponent {
   }
   
   toggleDropdown1() {
-    this.dropdownOpen = !this.dropdownOpen;
+    this.dropdownOpen1 = !this.dropdownOpen1;
   }
 
   simularAñadir(){

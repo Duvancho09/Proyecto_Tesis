@@ -24,7 +24,7 @@ export class CreateNFTComponent {
   selectedFile: File | null = null;
   loading: boolean = false;
 
-  private contractAddress = '0x415551658debABB96610dD70C7C7bEd216A21443';
+  private contractAddress = '0xc882D518356375670B3106F1bc4352E58E35dE95';
 
   itemName: string = '';
   itemDescription: string = '';
@@ -101,20 +101,36 @@ export class CreateNFTComponent {
         auctions: this.itemSupply ? Number(this.itemSupply) : 1
       };
 
-      this.nftService.addNft(newNFT);
-      this.loading = false;
+      this.nftService.addNft(newNFT).subscribe({
+        next: () => {
+          this.loading = false;
 
-      Swal.fire({
-        icon: 'success',
-        title: '¡Creación subida con éxito!',
-        text: 'Tu NFT ya está disponible en las colecciones para que sea comprada.',
-        background: '#1a1a2e',
-        color: '#fff',
-        confirmButtonColor: '#6a11cb',
-        confirmButtonText: 'Ir a ver'
-      }).then((result) => {
-        if(result.isConfirmed || result.isDismissed){
-          this.router.navigate(['/collections']);
+
+          Swal.fire({
+            icon: 'success',
+            title: '¡Creación subida con éxito!',
+            text: 'Tu NFT ya está disponible en las colecciones para que sea comprada.',
+            background: '#1a1a2e',
+            color: '#fff',
+            confirmButtonColor: '#6a11cb',
+            confirmButtonText: 'Ir a ver'
+          }).then((result) => {
+            if(result.isConfirmed || result.isDismissed){
+              this.router.navigate(['/collections']);
+            }
+          });
+        },
+        error: (err) => {
+          console.error('Error al guardar en el blockchain', err);
+          this.loading = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al guardar',
+            text: 'El NFT se minó en la blockchain pero el servidor no pudo guardarlo en la base de datos.',
+            background: '#1a1a2e',
+            color: '#fff',
+            confirmButtonColor: '#d33'
+          });
         }
       });
     } catch (error){
@@ -123,7 +139,7 @@ export class CreateNFTComponent {
       Swal.fire({
         icon: 'error',
         title: 'Error al minar',
-        text: 'Ocurrio un problema al procesar la transacción en la Blockchain.',
+        text: 'Ocurrio un problema al procesar la transacción en la Blockchain.', 
         background: '#1a1a2e',
         color: '#fff',
         confirmButtonColor: '#d33'

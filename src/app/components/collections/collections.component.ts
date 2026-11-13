@@ -7,7 +7,8 @@ import { animate, query, stagger, style, transition, trigger } from '@angular/an
 import { SidenavComponent } from '../bars/sidenav/sidenav.component';
 import { NftDataService } from '../../services/nft-data.service';
 import { OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 export interface NFT {
   name: string;
@@ -40,6 +41,7 @@ const translateY = trigger('translateY', [enterTransition])
   animations: [translateY]
 })
 export class CollectionsComponent implements OnInit{
+  nfts: any[] = [];
   searchText: string = '';
   selectedCategory: string = 'all';
   currentPage: number = 1;
@@ -48,31 +50,31 @@ export class CollectionsComponent implements OnInit{
   visibleImages: any[] = [];
   @ViewChildren('imageCard', { read: ElementRef }) imageCards!: QueryList<ElementRef>;
 
-  constructor(private nftService: NftDataService, private router: Router){}
+  constructor(private nftService: NftDataService, private router: Router){
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.cargarNfts();
+    });
+  }
 
   ngOnInit() {
-    this.nftService.getNfts().subscribe(newsNfts => {
-      if(newsNfts && newsNfts.length > 0){
-        const idsExistentes = new Set(this.images.map(img => img.name + img.url));
-        const unicos = newsNfts.filter(n => !idsExistentes.has(n.name + n.url));
+    this.cargarNfts();
+  }
 
-        this.images = [...unicos, ...this.images];
+  cargarNfts(){
+    this.nftService.getNfts().subscribe({
+      next: (data) => {
+        this.images = data || [];
         this.filterImages();
+      },
+      error: (err) => {
+        console.error('Error al cargar la galeria global:', err);
       }
     });
   }
 
-  images = [
-    { name: 'Yellow Painting', category: 'art', author: 'Artist1', url: 'assets/imgs/aro.jpg', price: '0.005 ETH' },
-    { name: 'Blue Artwork', category: 'art', author: 'Artist2', url: 'assets/imgs/cilindros.jpg', price: '0.005 ETH' },
-    { name: 'Music Beats', category: 'music', author: 'Artist3', url: 'assets/imgs/circulo.jpg', price: '0.005 ETH' },
-    { name: 'Abstract Colors', category: 'art', author: 'Artist4', url: 'assets/imgs/figuras.jpg', price: '0.005 ETH' },
-    { name: 'Digital Sound', category: 'music', author: 'Artist5', url: 'assets/imgs/metal.jpg', price: '0.005 ETH' },
-    { name: 'Sculpture Design', category: 'sculpture', author: 'Artist6', url: 'assets/imgs/moneda.png', price: '0.005 ETH' },
-    { name: 'Nature Photo', category: 'photography', author: 'Artist7', url: 'assets/imgs/muñeca.png', price: '0.005 ETH' },
-    { name: 'Modern Art', category: 'art', author: 'Artist8', url: 'assets/imgs/torre.jpg', price: '0.005 ETH' },
-    { name: 'City Landscape', category: 'photography', author: 'Artist9', url: 'assets/imgs/tubo.jpg', price: '0.005 ETH' },
-  ];
+  images: any[] = [];
 
   filteredImages = [...this.images];
 
@@ -83,7 +85,8 @@ export class CollectionsComponent implements OnInit{
   filterImages() {
     this.filteredImages = this.images.filter(image =>
       image.name.toLowerCase().includes(this.searchText.toLowerCase()) &&
-      (this.selectedCategory === 'all' || image.category === this.selectedCategory)
+      (this.selectedCategory === 'all' || image.category === this.selectedCategory) &&
+      (image.auctions === undefined || Number(image.auctions) > 0)
     );
     this.currentPage = 1;
   }

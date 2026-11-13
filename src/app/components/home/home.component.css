@@ -420,3 +420,52 @@ h3 {
       transform: translateY(0);
     }
 }
+
+.wallet-hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 16px;
+  border-radius: 12px;
+  width: fit-content;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Animación de la manita subiendo y bajando */
+.hand-icon {
+  font-size: 22px;
+  display: inline-block;
+  animation: bounceHand 1.2s infinite ease-in-out;
+}
+
+.hint-text {
+  color: #a78bfa; /* Tono morado claro / neón acorde a tu temática */
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+/* Keyframes para el rebote vertical */
+@keyframes bounceHand {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px); /* Sube 8 píxeles con suavidad */
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

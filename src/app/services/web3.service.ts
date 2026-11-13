@@ -17,13 +17,40 @@ export class Web3Service {
   public isConnected = signal<boolean>(false);
 
   private provider: BrowserProvider | null = null;
+  private readonly SESSION_DURATION_MS = 5 * 60 * 1000;
 
   constructor() {
-    this.checkIfMetaMaskIsInstalled();
+    if(this.checkIfMetaMaskIsInstalled()){
+      this.checkExistingSession();
+    }
   }
 
   public checkIfMetaMaskIsInstalled(): boolean {
     return typeof window !== 'undefined' && typeof window.ethereum !== 'undefined';
+  }
+
+  public logout(): void {
+    sessionStorage.removeItem('web3_account');
+    sessionStorage.removeItem('web3_timestamp');
+    this.currentAccount.set(null);
+    this.isConnected.set(false);
+  }
+
+  public checkExistingSession(): void{
+    const savedAccount = sessionStorage.getItem('web3_account');
+    const loginTimestamp = sessionStorage.getItem('web3_timestamp');
+
+    if(savedAccount && loginTimestamp){
+      const elapsed = Date.now() - Number(loginTimestamp);
+
+      if(elapsed > this.SESSION_DURATION_MS){
+        this.logout();
+      } else {
+        this.currentAccount.set(savedAccount);
+        this.isConnected.set(true);
+        this.listenToEvents();
+      }
+    }
   }
 
   public async switchToSepolia(): Promise<void>{
@@ -72,12 +99,16 @@ export class Web3Service {
       });
 
       if (accounts.length > 0) {
+        const account = accounts[0];
         this.currentAccount.set(accounts[0]);
         this.isConnected.set(true);
 
+        sessionStorage.setItem('web3_account', account);
+        sessionStorage.setItem('web3_timestamp', Date.now().toString());
+
         this.listenToEvents();
 
-        return accounts[0];
+        return account;
       }
     } catch (error) {
       console.error('Error al conectar con MetaMask:', error);
@@ -91,10 +122,24 @@ export class Web3Service {
       throw new Error('MetaMask no esta instalado en tu navegador.');
     }
     await this.switchToSepolia();
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
     this.provider = new ethers.BrowserProvider(window.ethereum);
 
-    return await this.provider.getSigner();
+    const accounts: string[] = await window.ethereum.request({ method: 'eth_accounts' });
+
+    if(!accounts || accounts.length === 0){
+      const requested: string[] = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      if (requested.length === 0) {
+        throw new Error('No hay ninguna cuenta conectada.');
+      }
+      this.currentAccount.set(requested[0]);
+      return await this.provider.getSigner(requested[0]);
+    }
+
+    const activeAccount = accounts[0];
+    this.currentAccount.set(activeAccount);
+    sessionStorage.setItem('web3_account', activeAccount);
+
+    return await this.provider.getSigner(activeAccount!);
   }
 
   private listenToEvents(): void {
@@ -113,5 +158,30 @@ export class Web3Service {
     window.ethereum.on('chainChanged', () => {
       window.location.reload();
     });
+  }
+
+  public async buyNftOnChain(contractAddress: string, abi: any, tokenId: number, priceInEth: string){
+    try {
+      const signer = await this.getSigner();
+      const contract = new ethers.Contract(contractAddress, abi, signer);
+
+      const priceInWei = ethers.parseEther(priceInEth);
+
+      const tx = await contract.getFunction('buyNFT')(tokenId, { value: priceInWei });
+
+      console.log('Transacción enviada:', tx.hash);
+
+      const receipt = await tx.wait();
+      console.log('Transacción confirmada:', receipt);
+
+      return {
+        success: true,
+        txHash: tx.hash,
+        tokenId: tokenId
+      };
+    } catch (error: any){
+      console.error('Error en la compra en blockchain:', error);
+      throw error;
+    }
   }
 }

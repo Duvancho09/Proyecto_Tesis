@@ -31,8 +31,8 @@
   <div class="row align-items-center">
     <div class="col-8 d-flex flex-column justify-content-center">
       <label class="text-white-50 small">Precio total</label>
-      <h2 class="eth-price mb-0">{{ precioTotalCalculado | number:'1.0-2' }}</h2>
-      <small class="text-info">({{ nft?.price | number:'1.0-2' }} c/u)</small>
+      <h2 class="eth-price mb-0">{{ precioTotalCalculado | number:'1.0-6' }} ETH</h2>
+      <small class="text-info">({{ precioUnitarioNumerico | number:'1.0-6' }} ETH c/u)</small>
     </div>
     
     <div class="col-4 border-start border-secondary">
@@ -73,27 +73,14 @@
 </div>
 
         <div class="payment-methods-grid mt-4" *ngIf="showPayment">
-          <h5 class="text-white mb-3">Selecciona tu método de pago</h5>
-          <div class="row g-3">
-            <div class="col-4">
-              <div class="payment-card">
-                <img src="assets/imgs/pse.png" alt="PSE">
-                <span>PSE</span>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="payment-card">
-                <img src="assets/imgs/efecty.jpg" alt="Efecty">
-                <span>Efecty</span>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="payment-card">
-                <i class="fas fa-credit-card"></i>
-                <span>Tarjeta</span>
-              </div>
-            </div>
-          </div>
+          <div class="payment-card text-center py-3 border border-info rounded"
+          (click)="ejecutarCompraBlockchain()"
+          style="cursor: pointer; background: rgba(93, 63, 211, 0.2);">
+          <i class="fab fa-ethereum fa-2x text-info mb-2"></i>
+          <span class="d-block text-white fw-bold">
+            {{ isProcessing ? 'Procesando en Blockchain...' : 'Comprar con MetaMask (Sepolia - Account 2)' }}
+          </span>
+        </div>
         </div>
       </div>
 

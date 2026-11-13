@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { NavbarComponent } from '../bars/navbar/navbar.component';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { AskService } from '../../services/ask.service';
 import { SidenavComponent } from '../bars/sidenav/sidenav.component';
+import { Web3Service } from '../../services/web3.service';
 
 // const enterTransition = transition(':enter', [
 //   query('.animacion-entrada', [
@@ -21,12 +23,14 @@ import { SidenavComponent } from '../bars/sidenav/sidenav.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ CommonModule, FormsModule, NavbarComponent, SidenavComponent],
+  imports: [CommonModule, FormsModule, NavbarComponent, SidenavComponent, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   // animations: [translateY]
 })
 export class HomeComponent {
+
+  @ViewChild('seccionSocios') seccionSocios!: ElementRef;
 
   images = [
     { name: 'Yellow Painting', category: 'art', author: 'Artist1', url: 'assets/imgs/aro.jpg' },
@@ -55,7 +59,9 @@ export class HomeComponent {
   asks: any[]=[];
   openedIndex: number | null = null;
 
-  constructor(private askService: AskService){}
+  constructor(private askService: AskService,
+    public web3Service: Web3Service
+  ){}
 
   ngOnInit(){
     this.asks = this.askService.getAsk();
@@ -63,6 +69,15 @@ export class HomeComponent {
 
   toggle(index:number): void {
     this.openedIndex = this.openedIndex === index ? null : index;
+  }
+
+  explorarMas(){
+    if(this.seccionSocios){
+      this.seccionSocios.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
   }
 
   filteredImages = [...this.images];

@@ -15,14 +15,23 @@
   
   <section class="gallery">
     <div *ngIf="filteredImages.length === 0" class="no-nfts-message">
-      <p>No hay obras registradasaún. ¡Se el primero en minar una!</p>
+      <p>No hay obras registradas aún. ¡Se el primero en minar una!</p>
     </div>
     
-    <div class="image-card" *ngFor="let image of filteredImages" [class.visible]="visibleImages.includes(image)" #imageCard>
+    <div class="image-card" *ngFor="let image of paginatedImages()" [class.visible]="visibleImages.includes(image)" #imageCard>
       <img class="imagen" [src]="image.url" [alt]="image.name">
       <p class="image-title">&#64;{{ image.author }}</p>
       <p class="image-category">{{ image.name }}</p>
       <p class="image-price">{{ image.price }}</p>
+
+      <div class="stock-indicator" *ngIf="image.auctions !== undefined" style="margin: 8px 0; font-size: 13px;">
+        <span *ngIf="image.auctions > 1" class="badge-stock" style="color: #4ade80; font-weight: bold;">
+          📦 Quedan {{ image.auctions }} disponibles
+        </span>
+        <span *ngIf="image.auctions === 1" class="badge-ultima" style="color: #facc15; font-weight: bold;">
+          ⚡ ¡Última unidad disponible!
+        </span>
+      </div>
       <button class="detail-btn" (click)="verDetalles(image.name)">Ver detalles</button>
     </div>
   </section>

@@ -5,9 +5,14 @@
       <div class="text-area">
         <h1>Crea, vende y recolecta tus nft favoritos en esta comunidad en español.</h1>
         <div class="buttons">
-          <button class="btn-white">Vende NFT</button>
-          <button class="btn-red">Explorar más</button>
+          <button class="btn-white" routerLink="/createNFT">Vende NFT</button>
+          <button class="btn-red" (click)="explorarMas()">Explorar más</button>
         </div>
+
+        <div class="wallet-hint" *ngIf="!web3Service.isConnected()">
+        <span class="hand-icon">👆</span>
+        <span class="hint-text">¡Conecta tu wallet primero para empezar!</span>
+      </div>
       </div>
       
       <div class="hero-right">
@@ -25,7 +30,7 @@
       </div>
     </div>
     
-    <div class="logos">
+    <div class="logos" #seccionSocios>
       <img src="assets/imgs/binance.png" alt="Binance">
       <img src="assets/imgs/ethereum.png" alt="Ethereum">
       <img src="assets/imgs/exodus.png" alt="Exodus">
@@ -34,7 +39,6 @@
   
   <section class="about-section">
     <h2>Sobre nosotros</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   </section>
   
   <section class="nft-section">
@@ -50,7 +54,6 @@
   
   <section class="collections-section">
     <h2>Colecciones</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     <a href="/collections" aria-label="link para ver las colecciones">
       <button class="btn-gradient" aria-label="boton para ir a colecciones">Explorar</button>
     </a>
@@ -62,7 +65,7 @@
       <p class="image-title">&#64;{{ image.author }}</p>
       <p class="image-category">{{ image.name }}</p>
       <p class="image-price">0.005 ETH</p>
-      <button class="detail-btn">Ver detalles</button>
+      <!-- <button class="detail-btn">Ver detalles</button> -->
     </div>
   </section>
   
@@ -77,7 +80,7 @@
       <p class="image-title2">&#64;{{ image.author }}</p>
       <p class="image-category">{{ image.name }}</p>
       <p class="image-price2">0.005 ETH</p>
-      <button class="detail-btn2">Ver detalles</button>
+      <!-- <button class="detail-btn2">Ver detalles</button> -->
     </div>
   </section>
   

@@ -1,34 +1,40 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NftDataService {
     
-    private nfts: any[] = [];
+    private apiUrl = 'http://localhost:3000/nfts';
     private nftsSubject = new BehaviorSubject<any[]>([]);
 
-    constructor(){
-        const savedNfts = localStorage.getItem('mis_nfts_creados');
-        if(savedNfts){
-            try{
-                this.nfts = JSON.parse(savedNfts);
-                this.nftsSubject.next(this.nfts);
-            } catch (e){
-                console.error("Error al parsear los NFTS guardados", e);
-                this.nfts = [];
-            }
-        }
+    constructor(private http: HttpClient){
+        this.cargarNftsGlobales();
     }
     
-    getNfts() {
+    getNfts(): Observable<any[]> {
         return this.nftsSubject.asObservable();
     }
+
+    cargarNftsGlobales(){
+        this.http.get<any[]>(this.apiUrl).subscribe({
+            next: (nfts) => {
+                this.nftsSubject.next(nfts);
+            },
+            error: (err) => {
+                console.error('Error al cargar la galeria global de Nfts:', err);
+            }
+        });
+    }
     
-    addNft(nuevoNft: any) {
-        this.nfts.push(nuevoNft);
-        this.nftsSubject.next(this.nfts);
-        localStorage.setItem('mis_nfts_creados', JSON.stringify(this.nfts));
+    addNft(nuevoNft: any): Observable<any> {
+        return this.http.post<any>(this.apiUrl, nuevoNft).pipe(
+            tap((nftCreado) => {
+                const currentNfts = this.nftsSubject.value;
+                this.nftsSubject.next([...currentNfts, nftCreado]);
+            })
+        );
     }
 }
